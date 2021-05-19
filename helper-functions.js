@@ -16,3 +16,7 @@ const memoize = (fn) => {
         }
     }
 }
+
+const getDOMElement() => {
+    
+}
