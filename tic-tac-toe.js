@@ -32,9 +32,6 @@ const bestMove = (state, player) => {
     return bestVal, bestState
 }
 
-console.log(factorial(5))
-console.log(factorial(6))
-
 // helper function: turn decimal into binary
 function dec2bin(dec) {
     return (dec >> 0).toString(2);
