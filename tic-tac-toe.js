@@ -1,5 +1,42 @@
-const helper = require('./helper-functions')
+// helper functions
+const choose = (choices) => {
+    var index = Math.floor(Math.random() * choices.length);
+    return choices[index]
+}
 
+const memoize = (fn) => {
+    let cache  = {};
+    return (...args) => {
+        let n = args[0];
+        if (n in cache) {
+            return cache[n];
+        } else {
+            let result = fn(n);
+            cache[n] = result;
+            return result;
+        }
+    }
+}
+
+const getDOMElements = () => {
+    resultElements = [];
+    resultElements.push(document.getElementById("00"));
+    resultElements.push(document.getElementById("01"));
+    resultElements.push(document.getElementById("02"));
+    resultElements.push(document.getElementById("10"));
+    resultElements.push(document.getElementById("11"));
+    resultElements.push(document.getElementById("12"));
+    resultElements.push(document.getElementById("20"));
+    resultElements.push(document.getElementById("21"));
+    resultElements.push(document.getElementById("22"));
+    return resultElements;
+}
+
+const editTextOfDOMElement = (e, text) => {
+    e.innerHTML = text;
+}
+
+// main programm
 const players = [0,1]
 const start = 0
 
