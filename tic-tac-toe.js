@@ -36,6 +36,38 @@ const editTextOfDOMElement = (e, text) => {
     e.innerHTML = text;
 }
 
+function printBoard(state){
+    x_state= state&511;
+    o_state= state>>9;
+    mask = 1;
+    for (cell of Array(9).keys()){
+        if (x_state&mask){
+            editTextOfDOMElement(boardFields[cell],"X");
+        }
+        if (o_state&mask){
+            editTextOfDOMElement(boardFields[cell],"O");
+        }
+        mask = mask<<1;
+    }
+}
+
+//test_state= set_bits([2,3,5,9+1,9+4,9+8])
+
+
+boardFields=getDOMElements();
+//printBoard(test_state)
+
+
+
+
+function other(p){
+    if(p==0){
+        return 1;
+    }
+    return 0;
+}
+
+
 // main programm
 const players = [0,1]
 const start = 0
@@ -47,7 +79,7 @@ const value = memoize(
             return utility(state, player)
         }
         o = other(player)
-        nextStates = nextState(state, player);
+        nextStates = next_states(state, player);
         result = [];
         for (const ns in nextStates) {
             result.push(-value(ns,o));
@@ -57,16 +89,21 @@ const value = memoize(
 )
 
 const bestMove = (state, player) => { 
-    nextStates = nextStates(state, player)
+    console.log("bestmove");
+    nextStates = next_states(state, player)
+    console.log("got next states");
     bestVal = value(state, player)
+    console.log("got values");
     bestMoves = []
+    console.log("1");
     for(const s in nextStates) {
         if(-value(s, other(player)) == bestVal) {
             bestMoves.push(s)
         }
     }
+    
     bestState = choose(bestMoves)
-    return bestVal, bestState
+    return [bestVal, bestState]
 }
 
 // helper function: turn decimal into binary
@@ -141,4 +178,46 @@ function finished(state){
 //console.log(empty(9))
 //console.log(next_states(1,1));
 //console.log(All_Lines)
-console.log(finished(7))
+//console.log(finished(7))
+
+
+function play_game(){
+    state = start;
+    while (1){
+        console.log("iteration");
+        firstPlayer = players[0];
+        res= bestMove(state, firstPlayer);
+        val=res[0];
+        state =res[1];
+        console.log("Value:",val);
+        printBoard(state);
+        if (finished(state)){
+            console.log("player 0 finished");
+            return;
+        } 
+        state= get_input(state);
+        printBoard(state);
+        if (finished(state)){
+            console.log("player 1 finished");
+            return;
+        }
+    }
+}
+
+
+
+function get_input(state){
+    while (1){
+        res= prompt("x,y of next move").split(",");
+        row=res[0];
+        col=res[1];
+        mask = set_bit(9+row*3+col);
+        if ((state&mask)==0){
+            return state|mask;
+        }else{
+            console.log("wrong input");
+        }
+    }
+}
+
+play_game();
