@@ -8,27 +8,34 @@
             <h1>
                 JavaScript - Tic Tac Toe with bitmask
             </h1>
-            <table>
+            <p class="info-text">
+                X = KI
+                <br>
+                O = Player
+            </p>
+            <table id= "game-table">
                 <tr>
-                    <td><p id="00"></p></td>
-                    <td><p id="01"></p></td>
-                    <td><p id="02"></p></td>
+                    <td id="00"><p ></p></td>
+                    <td id="01"></td>
+                    <td id="02"></td>
                 </tr>
                 <tr>
-                    <td><p id="10"></p></td>
-                    <td><p id="11"></p></td>
-                    <td><p id="12"></p></td>
+                    <td id="10"></td>
+                    <td id="11"></td>
+                    <td id="12"></td>
                 </tr>
                 <tr>
-                    <td><p id="20"></p></td>
-                    <td><p id="21"></p></td>
-                    <td><p id="22"></p></td>
+                    <td id="20"></td>
+                    <td id="21"></td>
+                    <td id="22"></td>
                 </tr>
             </table>
         </div>
         
         <br>
-        <button onclick="play_game();">Play</button>
+
+        <p id="status-field"></p>
+        <button onclick="reset_game();">Reset</button>
     </body>
     <script src="tic-tac-toe.js"></script>
 </html>

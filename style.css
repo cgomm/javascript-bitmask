@@ -20,3 +20,7 @@ td {
   overflow: hidden;
   text-align: center;
 }
+
+.info-text{
+    font-size: small;
+}
