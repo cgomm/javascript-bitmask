@@ -262,7 +262,11 @@ function reset_game(){
         editTextOfDOMElement(e,"");
     }
     
-    ki_move();
+    if(Math.floor(Math.random()*2)){
+        ki_move()
+    }else{
+        printStatus("You make the first move!");
+    }
 }
 
 
@@ -278,4 +282,8 @@ let game_finished = false;
 
 let boardFields = getDOMElements();
 
-ki_move()
+if(Math.floor(Math.random()*2)){
+    ki_move()
+}else{
+    printStatus("You make the first move!");
+}
